@@ -14,7 +14,10 @@ var Enemy = function(y) {
 Enemy.prototype.update = function(dt) {
     // 你应该给每一次的移动都乘以 dt 参数，以此来保证游戏在所有的电脑上
     // 都是以同样的速度运行的
-    this.x += this.speeed * dt;
+    this.x += this.speed * dt;
+    if (this.x>=505) {
+        this.x = -100;
+    }
 };
 
 // 此为游戏必须的函数，用来在屏幕上画出敌人，
@@ -27,7 +30,7 @@ Enemy.prototype.render = function() {
 var Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 200;
-    this.y = 327;
+    this.y = 320;
 };
 
 Player.prototype.update = function() {
@@ -35,10 +38,14 @@ Player.prototype.update = function() {
 };
 
 Player.prototype.render = function(){
-    ctx.drawImage(Resources.get(this.sprite,this.x,this.y));
+    ctx.drawImage(Resources.get(this.sprite),this.x,this.y);
 };
 
-Player.prototype.handleInput = function(){
+Player.prototype.handleInput = function(key){
+    if (key == "left" && this.x>=0) {this.x -= 101};
+    if (key == "right" && this.x<=400) {this.x += 101};
+    if (key == "up" && this.y>=0) {this.y -= 82};
+    if (key == "down" && this.y<380) {this.y += 82};
 
 };
 
@@ -47,6 +54,9 @@ Player.prototype.handleInput = function(){
 // 把玩家对象放进一个叫 player 的变量里面
 var allEnemies = [];
 var player = new Player();
+for (let i = 0; i < 3; i++) {
+    allEnemies[i] = new Enemy(i*82 + 64);
+}
 
 // 这段代码监听游戏玩家的键盘点击事件并且代表将按键的关键数字送到 Player.handleInput()
 // 方法里面。你不需要再更改这段代码了。
