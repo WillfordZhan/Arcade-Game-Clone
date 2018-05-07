@@ -29,12 +29,27 @@ Enemy.prototype.render = function() {
 // 这个类需要一个 update() 函数， render() 函数和一个 handleInput()函数
 var Player = function() {
     this.sprite = 'images/char-boy.png';
+    this.initPosition();
+};
+
+// 此函数用于把小人放回初始位置
+Player.prototype.initPosition = function(){
     this.x = 200;
-    this.y = 320;
+    this.y = 306;
 };
 
 Player.prototype.update = function() {
-    
+    // 碰撞检测
+    allEnemies.forEach(enemy => {
+        if (this.y == enemy.y && Math.abs(this.x - enemy.x) <= 75){
+            this.initPosition();
+        }
+    });
+    // 胜利检测
+    if (this.y < 60) {
+        alert("You win!!");
+        this.initPosition();
+    }
 };
 
 Player.prototype.render = function(){
@@ -55,7 +70,7 @@ Player.prototype.handleInput = function(key){
 var allEnemies = [];
 var player = new Player();
 for (let i = 0; i < 3; i++) {
-    allEnemies[i] = new Enemy(i*82 + 64);
+    allEnemies[i] = new Enemy(i*82 + 60);
 }
 
 // 这段代码监听游戏玩家的键盘点击事件并且代表将按键的关键数字送到 Player.handleInput()
