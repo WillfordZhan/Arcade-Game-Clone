@@ -11,7 +11,7 @@ The Arcade Game Clone is a game which migrates the old Arcade game "Flogger Game
 
 ## Quick Start
 ### Download 
-Use git clone on Git
+Use `git clone` on Git
 `git@github.com:WillfordZhan/Arcade-Game-Clone.git`
 
 ### Launch
