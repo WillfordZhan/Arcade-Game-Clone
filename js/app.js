@@ -47,8 +47,12 @@ Player.prototype.update = function() {
     });
     // 胜利检测
     if (this.y < 60) {
-        alert("You win!!");
-        this.initPosition();
+        swal("Congradulations! You won!","You has reached the river!", "success", {
+            button: "Play again!",
+          }).then((result) => {
+            this.initPosition();
+          });
+        
     }
 };
 
