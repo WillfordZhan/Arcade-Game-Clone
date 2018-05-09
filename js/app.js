@@ -1,5 +1,4 @@
-// 导入 swal 用于胜利动画
-import swal from 'sweetalert';
+
 // 这是我们的玩家要躲避的敌人 
 var Enemy = function(y) {
     // 要应用到每个敌人的实例的变量写在这里
@@ -48,13 +47,21 @@ Player.prototype.update = function() {
         }
     });
     // 胜利检测
-    if (this.y < 60) {
-        swal("Congradulations! You won!","You has reached the river!", "success", {
+    /*if (player.y < 60) {
+        swal("Congradulations! You won!", "You has reached the river!", "success", {
             button: "Play again!",
-          }).then((result) => {
-            this.initPosition();
-          });
-        
+        }).then((result) => {
+            player.initPosition();
+            history.go(0);
+        });
+    }*/
+    if (player.y < 60) {
+        swal("Congradulations! You won!", "You has reached the river!", "success", {
+            button: "Play again!",
+        }).then((result) => {
+            history.go(0);
+        });
+        player.initPosition();
     }
 };
 
